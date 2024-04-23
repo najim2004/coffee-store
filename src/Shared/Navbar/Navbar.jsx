@@ -33,7 +33,7 @@ const Navbar = () => {
               {user ? (
                 <div className="flex z-20 gap-3 items-center">
                   <div
-                    data-tip={user?.displayName.toUpperCase()}
+                    data-tip={user?.displayName?.toUpperCase()}
                     className="tooltip tooltip-left dropdown dropdown-end"
                   >
                     <div

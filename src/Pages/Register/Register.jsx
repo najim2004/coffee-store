@@ -37,6 +37,18 @@ const Register = () => {
           photoURL: Photo ? Photo : "",
         })
           .then(() => {
+            fetch("http://localhost:5000/users", {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(data),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                console.log(data);
+              })
+              .catch((err) => console.log(err));
             sweetAlert(
               "Successfully Registered",
               "success",
