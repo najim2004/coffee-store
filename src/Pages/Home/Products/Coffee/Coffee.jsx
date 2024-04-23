@@ -23,7 +23,7 @@ const Coffee = ({ coffee, handleDelate }) => {
         </h3>
       </div>
       <div className="flex flex-col gap-4">
-        <Link>
+        <Link to={`/details/${coffee?._id}`}>
           <button className="btn btn-sm size-10 rounded-[5px] bg-eyeColor">
             <img className="size-5" src={eye} alt="" />
           </button>

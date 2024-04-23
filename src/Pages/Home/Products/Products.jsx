@@ -3,6 +3,7 @@ import coffeeCup from "../../../assets/images/icons/add-coffee.svg";
 import bg from "../../../assets/images/more/1.png";
 import { useEffect, useState } from "react";
 import Coffee from "./Coffee/Coffee";
+import Swal from "sweetalert2";
 const Products = () => {
   const [coffees, setCoffees] = useState([]);
 
@@ -14,18 +15,35 @@ const Products = () => {
       });
   }, []);
   const handleDelate = (id) => {
-    const url = `http://localhost:5000/coffees/${id}`;
-    fetch(url, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        {
-          if (data.deletedCount > 0) {
-            setCoffees(coffees.filter((coffee) => coffee._id !== id));
-          }
-        }
-      });
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const url = `http://localhost:5000/coffees/${id}`;
+        fetch(url, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            {
+              if (data.deletedCount > 0) {
+                setCoffees(coffees.filter((coffee) => coffee._id !== id));
+                Swal.fire({
+                  title: "Deleted!",
+                  text: "Your file has been deleted.",
+                  icon: "success",
+                });
+              }
+            }
+          });
+      }
+    });
   };
   return (
     <div

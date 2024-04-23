@@ -11,6 +11,7 @@ export default {
         editColor: "#3C393B",
         deleColor: "#EA4744",
         cardBg: "#F5F4F1",
+        btnColor: "#E3B577",
       },
     },
   },

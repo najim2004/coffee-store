@@ -43,7 +43,11 @@ const AddCoffee = () => {
       body: JSON.stringify(updatedCoffee),
     })
       .then((res) => res.json)
-      .then((data) => console.log(data))
+      .then((data) => {
+        console.log(data);
+        alert("Updated successfully");
+        form.reset();
+      })
       .catch((err) => console.log(err));
   };
 
@@ -79,6 +83,7 @@ const AddCoffee = () => {
       .then((data) => {
         console.log(data);
         alert("Successfully coffee added!");
+        form.reset();
       })
       .catch((err) => console.log(err));
   };
@@ -95,7 +100,9 @@ const AddCoffee = () => {
         </Link>
         <div className="w-full h-full px-[100px] py-[70px] rounded-[5px] bg-cardBg">
           <h3 className="font-rancho text-[45px] text-[#374151] text-center">
-            {location.state ? "Update this Coffee Details" : "Add New Coffee"}
+            {location.state
+              ? "Update Existing Coffee Details"
+              : "Add New Coffee"}
           </h3>
           <p className="max-w-[932px] mt-6 mb-7 mx-auto text-lg leading-[30px] text-center">
             It is a long established fact that a reader will be distraceted by
@@ -201,7 +208,7 @@ const AddCoffee = () => {
               className="h-12 col-span-2 btn btn-sm !font-normal font-rancho text-2xl text-[#331A15] bg-[#D2B48C] w-full border-[2px] border-[#331A15] rounded-[5px]"
               type="submit"
               name=""
-              value="Add Coffee"
+              value={id ? "Update Coffee Details" : "Add Coffee"}
             />
           </form>
         </div>
