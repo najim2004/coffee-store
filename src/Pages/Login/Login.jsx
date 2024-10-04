@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useContext, useEffect, useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { ContextData } from "../../ContextProvider/ContextProvider";
+import axios from "axios";
 const Login = () => {
   const {
     user,
@@ -68,19 +69,30 @@ const Login = () => {
 
   const fromSubmit = (data) => {
     const { Email, password } = data;
+
     loginUser(Email, password)
       .then((currentUser) => {
-        sweetLoginAlert(
-          `Welcome Back "${currentUser?.user?.displayName.toUpperCase()}"`,
-          1500
-        );
-        setTimeout(() => {
-          if (location?.state) {
-            navigator(location.state);
-          } else {
-            navigator("/");
-          }
-        }, 1500);
+        axios
+          .post(
+            "http://localhost:5000/jwt",
+            { Email },
+            { withCredentials: true }
+          )
+          .then((response) => {
+            if (response.data.success) {
+              sweetLoginAlert(
+                `Welcome Back "${currentUser?.user?.displayName.toUpperCase()}"`,
+                1500
+              );
+              setTimeout(() => {
+                if (location?.state) {
+                  navigator(location.state);
+                } else {
+                  navigator("/");
+                }
+              }, 1500);
+            }
+          });
       })
       .catch((error) => {
         if (error.code === "auth/invalid-credential") {

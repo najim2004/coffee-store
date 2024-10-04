@@ -40,7 +40,7 @@ const router = createBrowserRouter([
       {
         path: "/details/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/coffees/${params.id}`),
+          fetch(`https://coffee-store-server-green-eight.vercel.app/coffees/${params.id}`),
         element: (
           <PrivateRoute>
             <Details></Details>

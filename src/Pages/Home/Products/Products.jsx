@@ -4,14 +4,17 @@ import bg from "../../../assets/images/more/1.png";
 import { useEffect, useState } from "react";
 import Coffee from "./Coffee/Coffee";
 import Swal from "sweetalert2";
+import axios from "axios";
 const Products = () => {
   const [coffees, setCoffees] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/coffees")
-      .then((res) => res.json())
+    axios
+      .get("http://localhost:5000/coffees", {
+        withCredentials: true,
+      })
       .then((data) => {
-        setCoffees(data);
+        setCoffees(data.data);
       });
   }, []);
   const handleDelate = (id) => {
@@ -25,7 +28,7 @@ const Products = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        const url = `http://localhost:5000/coffees/${id}`;
+        const url = `https://coffee-store-server-green-eight.vercel.app/coffees/${id}`;
         fetch(url, {
           method: "DELETE",
         })

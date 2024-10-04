@@ -9,7 +9,7 @@ const AddCoffee = () => {
 
   useEffect(() => {
     if (id) {
-      fetch(`http://localhost:5000/coffees/${id}`)
+      fetch(`https://coffee-store-server-green-eight.vercel.app/coffees/${id}`)
         .then((res) => res.json())
         .then((data) => asetCoffee(data));
     }
@@ -35,7 +35,7 @@ const AddCoffee = () => {
       Details,
       Photo,
     };
-    fetch(`http://localhost:5000/coffees/${id}`, {
+    fetch(`https://coffee-store-server-green-eight.vercel.app/coffees/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -72,7 +72,7 @@ const AddCoffee = () => {
       Details,
       Photo,
     };
-    fetch("http://localhost:5000/coffees", {
+    fetch("https://coffee-store-server-green-eight.vercel.app/coffees", {
       method: "POST",
       headers: {
         "content-type": "application/json",
